@@ -16,6 +16,7 @@ def endEffectorJacobianHW3(q:list[float])->list[float]:
 #code here
 def checkSingularityHW3(q:list[float])->bool:
     epsilon = 0.001
+    J_e = endEffectorJacobianHW3(q)
     J_star = J_e[:3, :]
     det_J_star = np.linalg.det(J_star)
     if abs(det_J_star) < epsilon:
@@ -26,7 +27,8 @@ def checkSingularityHW3(q:list[float])->bool:
 #=============================================<คำตอบข้อ 3>======================================================#
 #code here
 def computeEffortHW3(q:list[float], w:list[float])->list[float]:
-    J_T = np.transpose(J_star)
+    J_e = endEffectorJacobianHW3(q)
+    J_T = np.transpose(J_e)
     tau = J_T*w
     return tau
 #==============================================================================================================#
